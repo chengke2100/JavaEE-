@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iotek.ssm.dao.ResumeDao">
+	<insert id="insertResume" parameterType="Resume" >
+		insert into 
+			resumes(u_id,real_name,sex,age, education,phone_number,email,position_id,political_status,
+			previous_job,work_experience,expected_salary,hobbys)
+		values
+			(#{uid},#{realName},#{sex},#{age},#{education},#{phoneNumber},#{email},#{position.pid},
+			#{politicalStatus},#{previousJob},#{workExperience},#{expectedSalary},#{hobbys})
+	</insert>
+	<update id="updateResume" parameterType="Resume">
+		update 
+			resumes
+		set
+			u_id=#{uid},real_name=#{realName},sex=#{sex},age=#{age},
+			education=#{education},phone_number=#{phoneNumber},email=#{email},
+			position_id=#{position.pid},political_status=#{politicalStatus},
+			previous_job=#{previousJob},work_experience=#{workExperience},
+			expected_salary=#{expectedSalary},hobbys=#{hobbys}
+		where
+			r_id=#{rid}
+	</update>
+	
+	<select id="queryResumeById" resultMap="ResumeResult">
+		select 
+			* 
+		from 
+			resumes r,positions p,departments d 
+		where 
+			r.position_id=p.p_id and p.dept_id=d.d_id and r_id=#{rid}
+	</select>
+	
+	<resultMap type="Resume" id="ResumeResult">
+		<id property="rid" column="r_id"/>
+		<result property="uid" column="u_id"/>
+		<result property="realName" column="real_name"/>
+		<result property="sex" column="sex"/>
+		<result property="age" column="age"/>
+		<result property="education" column="education"/>
+		<result property="phoneNumber" column="phone_number"/>
+		<result property="email" column="email"/>
+		<result property="politicalStatus" column="political_status"/>
+		<result property="previousJob" column="previous_job"/>
+		<result property="workExperience" column="work_experience"/>
+		<result property="expectedSalary" column="expected_salary"/>
+		<result property="hobbys" column="hobbys"/>
+		<association property="position" javaType="Position" >
+			<id property="pid" column="p_id"/>
+			<result property="name" column="position_name"/>
+			<association property="department" javaType="Department">
+				<id property="did" column="d_id"/>
+				<result property="deptName" column="dept_name"/>
+			</association>
+		</association>
+		
+	</resultMap>
+</mapper>

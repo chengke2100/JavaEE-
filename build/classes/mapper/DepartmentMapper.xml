@@ -18,7 +18,7 @@
 	</update>
 	
 	<select id="queryDepartmentById" resultMap="DepartmentResult">
-		select * from users u,departments d,positions p where u.dept_id=d.d_id and u.position_id=p.p_id and d.d_id=#{did}
+		select * from departments d,positions p where   d.d_id=p.dept_id and d.d_id=#{did}
 	</select>
 	<resultMap type="Department" id="DepartmentResult">
 		<id property="did" column="d_id"/>
@@ -28,14 +28,14 @@
 			<id property="pid" column="p_id"></id>
 			<result property="name" column="position_name"/>
 			<result property="createTime" column="create_time"/>
-			<collection property="users" ofType="User">
+			<!-- <collection property="users" ofType="User">
 				<id property="uid" column="u_id"/>
 				<result property="userName" column="user_name"/>
 				<result property="password" column="password"/>
 				<result property="type" column="type"/>
 				<result property="entryDate" column="entry_date"/>
 				<result property="resignationReason" column="resignation_reason"/>
-			</collection>
+			</collection> -->
 		</collection>
 	</resultMap>
 	

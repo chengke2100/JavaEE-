@@ -1,0 +1,31 @@
+body {
+	background-image: url(../img/homepage.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+div {
+	margin-top: 80px;
+}
+
+.register {
+	line-height: 25px;
+	margin: 15px auto 0px;
+	padding: 0 15px;
+	border: 1px solid rgba(255, 255, 255, 0.38);
+	background: rgb(244, 70, 66);
+	border-radius: 6px;
+	width: 150px;
+}
+
+.login {
+	line-height: 25px;
+	margin: 15px auto 0px;
+	padding: 0 15px;
+	border: 1px solid rgba(255, 255, 255, 0.38);
+	background: rgb(152,152,152);
+	border-radius: 6px;
+	width: 150px;
+}
