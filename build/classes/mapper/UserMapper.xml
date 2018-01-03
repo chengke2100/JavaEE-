@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iotek.ssm.dao.UserDao">
+	<insert id="insertUser" parameterType="User" >
+		insert into 
+			users(user_name,password,type,entry_date,dept_id,position_id)
+		values
+			(#{userName},#{password},#{type},#{entryDate},#{department.did},#{position.pid})
+	</insert>
+	
+	<update id="updateUser" parameterType="User">
+		update 
+			users 
+		set 
+			user_name=#{userName},password=#{password},type=#{type},entry_date=#{entryDate},
+			dept_id=#{department.did},position_id=#{position.pid}
+		where u_id=#{uid}
+	</update>
+	
+	<select id="queryUserById" resultMap="UserResult">
+		select * from users u,departments d,positions p where u.dept_id=d.d_id and u.position_id=p.p_id and u.u_id=#{uid}
+	</select>
+	<resultMap type="User" id="UserResult">
+		<id property="uid" column="u_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="password" column="password"/>
+		<result property="type" column="type"/>
+		<result property="entryDate" column="entry_date"/>
+		<result property="resignationReason" column="resignation_reason"/>
+		<association property="department" javaType="Department">
+			<id property="did" column="d_id"/>
+			<result property="deptName" column="dept_name"/>
+		</association>
+		<association property="position" javaType="Position">
+			<id property="pid" column="p_id"/>
+			<result property="name" column="position_name"/>
+		</association>
+	</resultMap>
+	
+	<select id="queryUserByNameAndPassword1" resultMap="UserResult" parameterType="String">
+		select * from users u where u.user_name=#{userName} and u.password=#{password}
+	</select>
+	
+	<select id="queryAllUsers" resultMap="UserResult">
+		select * from users u,departments d,positions p where u.dept_id=d.d_id and u.position_id=p.p_id 
+	</select>
+</mapper>
