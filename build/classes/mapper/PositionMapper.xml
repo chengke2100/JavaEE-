@@ -6,7 +6,7 @@
 		insert into 
 			positions(position_name,create_time,dept_id)
 		values
-			(#{deptName},#{createTime},#{department.did})
+			(#{name},#{createTime},#{department.did})
 	</insert>
 	
 

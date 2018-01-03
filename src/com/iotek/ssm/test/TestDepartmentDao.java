@@ -2,7 +2,9 @@ package com.iotek.ssm.test;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +32,10 @@ public class TestDepartmentDao {
 		Department department = new Department(-1, "销售部", new Date(), null);
 		Position position = new Position(-1, "销售主管", department, new Date(), null);
 		User user = new User(-1, "aaa", "111", 1, new Date(), department, position, null);
-		List<User> users = new ArrayList<>();
+		Set<User> users = new HashSet<>();
 		users.add(user);
 		position.setUsers(users);
-		List<Position> positions = new ArrayList<>();
+		Set<Position> positions = new HashSet<>();
 		positions.add(position);
 		department.setPositions(positions);
 		int res1 = positionDao.insertPosition(position);

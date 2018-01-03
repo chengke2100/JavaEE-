@@ -1,13 +1,14 @@
 package com.iotek.ssm.entity;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Department {
 	private int did;
 	private String deptName;
 	private Date createTime;
-	private List<Position> positions;
+	private Set<Position> positions = new HashSet<Position>();
 	public int getDid() {
 		return did;
 	}
@@ -28,20 +29,22 @@ public class Department {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public List<Position> getPositions() {
+
+	
+	
+	public Set<Position> getPositions() {
 		return positions;
 	}
-	public void setPositions(List<Position> positions) {
+	public void setPositions(Set<Position> positions) {
 		this.positions = positions;
 	}
-	
-	
 	public Department() {
 		super();
 	}
 	
 	
-	public Department(int did, String deptName, Date createTime, List<Position> positions) {
+	
+	public Department(int did, String deptName, Date createTime, Set<Position> positions) {
 		super();
 		this.did = did;
 		this.deptName = deptName;
