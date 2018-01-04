@@ -5,10 +5,10 @@
 	<insert id="insertResume" parameterType="Resume" >
 		insert into 
 			resumes(u_id,real_name,sex,age, education,phone_number,email,position_id,political_status,
-			previous_job,work_experience,expected_salary,hobbys)
+			previous_job,work_experience,expected_salary,hobbys,isRead)
 		values
 			(#{uid},#{realName},#{sex},#{age},#{education},#{phoneNumber},#{email},#{position.pid},
-			#{politicalStatus},#{previousJob},#{workExperience},#{expectedSalary},#{hobbys})
+			#{politicalStatus},#{previousJob},#{workExperience},#{expectedSalary},#{hobbys},#{isRead})
 	</insert>
 	<update id="updateResume" parameterType="Resume">
 		update 
@@ -18,7 +18,7 @@
 			education=#{education},phone_number=#{phoneNumber},email=#{email},
 			position_id=#{position.pid},political_status=#{politicalStatus},
 			previous_job=#{previousJob},work_experience=#{workExperience},
-			expected_salary=#{expectedSalary},hobbys=#{hobbys}
+			expected_salary=#{expectedSalary},hobbys=#{hobbys},isRead=#{isRead}
 		where
 			r_id=#{rid}
 	</update>
@@ -46,6 +46,7 @@
 		<result property="workExperience" column="work_experience"/>
 		<result property="expectedSalary" column="expected_salary"/>
 		<result property="hobbys" column="hobbys"/>
+		<result property="isRead" column="isRead"/>
 		<association property="position" javaType="Position" >
 			<id property="pid" column="p_id"/>
 			<result property="name" column="position_name"/>

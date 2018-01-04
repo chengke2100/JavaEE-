@@ -15,12 +15,14 @@ public class Resume {
 	private String workExperience;//工作经验
 	private String expectedSalary;//期望薪资
 	private String hobbys;
+	private String isRead;//是否已阅
 	public Resume() {
 		super();
 	}
+	
 	public Resume(int rid, int uid, String realName, String sex, int age, String education, String phoneNumber,
 			String email, Position position, String politicalStatus, String previousJob, String workExperience,
-			String expectedSalary, String hobbys) {
+			String expectedSalary, String hobbys, String isRead) {
 		super();
 		this.rid = rid;
 		this.uid = uid;
@@ -36,7 +38,9 @@ public class Resume {
 		this.workExperience = workExperience;
 		this.expectedSalary = expectedSalary;
 		this.hobbys = hobbys;
+		this.isRead = isRead;
 	}
+
 	public int getRid() {
 		return rid;
 	}
@@ -121,14 +125,23 @@ public class Resume {
 	public void setHobbys(String hobbys) {
 		this.hobbys = hobbys;
 	}
+	
+	public String getIsRead() {
+		return isRead;
+	}
+	public void setIsRead(String isRead) {
+		this.isRead = isRead;
+	}
+
 	@Override
 	public String toString() {
 		return "Resume [rid=" + rid + ", uid=" + uid + ", realName=" + realName + ", sex=" + sex + ", age=" + age
 				+ ", education=" + education + ", phoneNumber=" + phoneNumber + ", email=" + email + ", position="
 				+ position + ", politicalStatus=" + politicalStatus + ", previousJob=" + previousJob
 				+ ", workExperience=" + workExperience + ", expectedSalary=" + expectedSalary + ", hobbys=" + hobbys
-				+ "]";
+				+ ", isRead=" + isRead + "]";
 	}
+	
 	
 	
 }

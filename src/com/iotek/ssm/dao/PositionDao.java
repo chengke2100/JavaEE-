@@ -9,6 +9,10 @@ public interface PositionDao {
 	 * @return
 	 */
 	int insertPosition(Position position);
-	
-	
+	/**
+	 * 根据id查询职位
+	 * @param pid
+	 * @return
+	 */
+	Position queryPositionById(int pid);
 }

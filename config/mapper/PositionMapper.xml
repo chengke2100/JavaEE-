@@ -9,5 +9,17 @@
 			(#{name},#{createTime},#{department.did})
 	</insert>
 	
-
+	<select id="queryPositionById" resultMap="PositionResult">
+		select * from positions p,departments d where p.dept_id=d.d_id and p.p_id=#{pid}
+	</select>
+	
+	<resultMap type="Position" id="PositionResult">
+		<id property="pid" column="p_id"/>
+			<result property="name" column="position_name"/>
+			<result property="createTime" column="create_time"/>
+			<association property="department" javaType="Department">
+				<id property="did" column="d_id"/>
+				<result property="deptName" column="dept_name"/>
+			</association>
+	</resultMap>
 </mapper>

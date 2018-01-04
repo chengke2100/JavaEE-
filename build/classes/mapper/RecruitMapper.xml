@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iotek.ssm.dao.RecruitDao">
+	<insert id="insertRecruit" parameterType="Recruit" >
+		insert into 
+			recruits(company_name,position_id,job_information, requirements,salary,status)
+		values
+			(#{companyName},#{position.pid},#{jobInformation},#{requirements},#{salary},#{status})
+	</insert>
+	
+	<update id="updateRecruit" parameterType="Recruit">
+		update
+			recruits
+		set
+			company_name=#{companyName},position_id=#{position.pid},job_information=#{jobInformation},
+			requirements=#{requirements},salary=#{salary},status=#{status}
+		where
+			recruits_id=#{recruitsId}
+	</update>
+	
+	<select id="queryRecruitById" resultMap="RecruitResult">
+		select 
+			*
+		from 
+			recruits r,positions p,departments d
+	 	where 
+	 		r.position_id=p.p_id and p.dept_id=d.d_id and r.recruits_id=#{recruitId}
+	</select>
+	
+	<resultMap type="Recruit" id="RecruitResult">
+		<id property="recruitsId" column="recruits_id"/>
+		<result property="companyName" column="company_name"/>
+		<result property="jobInformation" column="job_information"/>
+		<result property="requirements" column="requirements"/>
+		<result property="salary" column="salary"/>
+		<result property="status" column="status"/>
+		<association property="position" javaType="Position">
+			<id property="pid" column="p_id"/>
+			<result property="name" column="position_name"/>
+			<association property="department" javaType="Department">
+				<id property="did" column="d_id"/>
+				<result property="deptName" column="dept_name"/>
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="queryRecruitsByStatus" resultMap="RecruitResult">
+		select 
+			*
+		from 
+			recruits r,positions p,departments d
+	 	where 
+	 		r.position_id=p.p_id and p.dept_id=d.d_id and r.status=#{status}
+	</select>
+</mapper>

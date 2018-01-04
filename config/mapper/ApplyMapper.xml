@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iotek.ssm.dao.ApplyDao">
+	<insert id="insertApply" parameterType="Apply" >
+		insert into 
+			apply(recruit_id,user_id,delive_time, is_read,status)
+		values
+			(#{recruit.recruitsId},#{userId},#{deliverTime},#{isRead},#{status})
+	</insert>
+	
+	<delete id="deleteApply">
+		delete from apply where apply_id=#{applyId}
+	</delete>
+	
+	<select id="queryAllApplys" resultMap="ApplyResult">
+		select * from apply a,recruits r where a.apply_id=r.recruits_id
+	</select>
+	
+	<resultMap type="Apply" id="ApplyResult">
+		<id property="applyId" column="apply_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="deliverTime" column="delive_time"/>
+		<result property="isRead" column="is_read"/>
+		<result property="status" column="status"/>
+		<association property="recruit" javaType="Recruit">
+			<id property="recruitsId" column="recruits_id"/>
+		</association>
+	</resultMap>
+</mapper>
