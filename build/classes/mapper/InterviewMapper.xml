@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iotek.ssm.dao.InterviewDao">
+	<insert id="insertInterview" parameterType="Interview" >
+		insert into 
+			interviews(apply_id,is_interview,interview_time, is_hire)
+		values
+			(#{apply.applyId},#{isInterview},#{interviewTime},#{isHire})
+	</insert>
+	
+	
+	
+	<select id="queryInterviewByUid" resultMap="InterviewResult">
+		select * from apply a,interviews i where a.apply_id=i.apply_id
+	</select>
+	
+	<resultMap type="Interview" id="InterviewResult">
+		<id property="interId" column="inter_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="isInterview" column="is_interview"/>
+		<result property="interviewTime" column="interview_time"/>
+		<result property="isHire" column="is_hire"/>
+		<association property="apply" javaType="Apply">
+			<id property="applyId" column="apply_id"/>
+			<result property="userId" column="user_id"/>
+			<result property="deliverTime" column="delive_time"/>
+			<result property="isRead" column="is_read"/>
+			<result property="status" column="status"/>
+		</association>
+	</resultMap>
+</mapper>

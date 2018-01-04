@@ -1,6 +1,7 @@
 package com.iotek.ssm.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,10 +29,12 @@ public class TestApplyDao {
 	}
 	@Test
 	public void testqueryResumeById() {
-	
+		int res = applyDao.deleteApply(1);
+		System.out.println(res);
 	}
 	@Test
 	public void testupdate() {
-
+		List<Apply> applys = applyDao.queryAllApplys();
+		System.out.println(applys);
 	}
 }

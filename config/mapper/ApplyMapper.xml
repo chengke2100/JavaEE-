@@ -14,7 +14,7 @@
 	</delete>
 	
 	<select id="queryAllApplys" resultMap="ApplyResult">
-		select * from apply a,recruits r where a.apply_id=r.recruits_id
+		select * from apply a,recruits r where a.recruit_id=r.recruits_id
 	</select>
 	
 	<resultMap type="Apply" id="ApplyResult">
