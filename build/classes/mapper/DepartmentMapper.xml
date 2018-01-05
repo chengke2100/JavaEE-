@@ -28,14 +28,6 @@
 			<id property="pid" column="p_id"></id>
 			<result property="name" column="position_name"/>
 			<result property="createTime" column="create_time"/>
-			<!-- <collection property="users" ofType="User">
-				<id property="uid" column="u_id"/>
-				<result property="userName" column="user_name"/>
-				<result property="password" column="password"/>
-				<result property="type" column="type"/>
-				<result property="entryDate" column="entry_date"/>
-				<result property="resignationReason" column="resignation_reason"/>
-			</collection> -->
 		</collection>
 	</resultMap>
 	

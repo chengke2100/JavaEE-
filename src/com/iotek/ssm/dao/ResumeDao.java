@@ -21,4 +21,10 @@ public interface ResumeDao {
 	 * @return
 	 */
 	Resume queryResumeById(int rid);
+	/**
+	 * 根据用户id查询简历
+	 * @param uid
+	 * @return
+	 */
+	Resume queryResumeByUid(int uid);
 }

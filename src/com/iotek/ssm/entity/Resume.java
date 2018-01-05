@@ -1,7 +1,7 @@
 package com.iotek.ssm.entity;
 
 public class Resume {
-	private int rid;
+	private Integer rid;
 	private int uid;
 	private String realName;
 	private String sex;
@@ -20,7 +20,7 @@ public class Resume {
 		super();
 	}
 	
-	public Resume(int rid, int uid, String realName, String sex, int age, String education, String phoneNumber,
+	public Resume(Integer rid, int uid, String realName, String sex, int age, String education, String phoneNumber,
 			String email, Position position, String politicalStatus, String previousJob, String workExperience,
 			String expectedSalary, String hobbys, String isRead) {
 		super();
@@ -41,10 +41,10 @@ public class Resume {
 		this.isRead = isRead;
 	}
 
-	public int getRid() {
+	public Integer getRid() {
 		return rid;
 	}
-	public void setRid(int rid) {
+	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
 	public int getUid() {
