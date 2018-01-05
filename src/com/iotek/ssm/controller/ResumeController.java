@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.iotek.ssm.entity.Position;
 import com.iotek.ssm.entity.Resume;
 import com.iotek.ssm.entity.User;
@@ -21,13 +23,13 @@ public class ResumeController {
 	@Autowired
 	private PositionService positionService;
 
-	@RequestMapping("query")
-	public String queryResume(HttpSession session, Model model) {
-		User user = (User) session.getAttribute("user");
-		Resume resume = resumeService.getResumeByUid(user.getUid());
-		model.addAttribute("resume", resume);
-		return "tourist";
-	}
+//	@ResponseBody
+//	@RequestMapping(value="query",produces = "application/json; charset=utf-8")
+//	public String queryResume(HttpSession session) {
+//		User user = (User) session.getAttribute("user");
+//		Resume resume = resumeService.getResumeByUid(user.getUid());
+//		return JSON.toJSONString(resume);
+//	}
 
 	@RequestMapping("add")
 	public String addResume(Resume resume, Integer resumeId, Integer deptId, Integer pid, HttpSession session,

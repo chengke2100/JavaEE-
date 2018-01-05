@@ -21,4 +21,15 @@ public class UserServiceImpl implements UserService {
 		return userDao.queryUserByNameAndPassword1(userName, password);
 	}
 
+	@Override
+	public Boolean isReapat(String userName) {
+		Integer uid = userDao.queryUserName(userName);
+		return uid!=null?true:false;
+	}
+
+	@Override
+	public int updateUser(User user) {
+		return userDao.updateUser(user);
+	}
+
 }

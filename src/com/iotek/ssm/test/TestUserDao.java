@@ -44,4 +44,10 @@ public class TestUserDao {
 		List<User> users = userDao.queryAllUsers();
 		System.out.println(users);
 	}
+	
+	@Test
+	public void testqueryUserName() {
+		Integer res = userDao.queryUserName("aab");
+		System.out.println(res);
+	}
 }

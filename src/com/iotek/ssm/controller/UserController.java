@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.iotek.ssm.entity.Department;
 import com.iotek.ssm.entity.Position;
+import com.iotek.ssm.entity.Resume;
 import com.iotek.ssm.entity.User;
 import com.iotek.ssm.service.DepartmentService;
+import com.iotek.ssm.service.PositionService;
+import com.iotek.ssm.service.ResumeService;
 import com.iotek.ssm.service.UserService;
+import com.iotek.ssm.util.MyUtil;
 
 @Controller
 @RequestMapping("user")
@@ -24,7 +28,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private DepartmentService departmentService;
+	private DepartmentService departmentService; 
+	@Autowired
+	private ResumeService resumeService;
+	@Autowired
+	private PositionService positionService;
 
 	@RequestMapping("loginPage")
 	public String goLoginPage() {
@@ -35,21 +43,40 @@ public class UserController {
 	public String goRegisterPage() {
 		return "forward:../register.jsp";
 	}
+	
+	@RequestMapping("check")
+	@ResponseBody
+	public String checkName(String userName) {
+		Boolean res = userService.isReapat(userName);
+		if(res) {
+			return "yes";
+		}
+		return "no";
+	}
 
 	@RequestMapping("register")
-	public String register(User user, HttpSession session) {
+	public String register(User user,String password1, HttpSession session) {
 		user.setType(1);
+		String password = MyUtil.md5(password1);
+		user.setPassword(password);
 		userService.addUser(user);
-		return "redirect:user/login";
+		return "forward:../user/login";
 	}
 
 	@RequestMapping("login")
-	public String login(Model model, String userName, String password, HttpSession session) {
-		User user = userService.findUserByNameAndPassowrd(userName, password);
+	public String login(Model model, String userName, String password1, HttpSession session) {
+		String md5Password = MyUtil.md5(password1);
+		User user = userService.findUserByNameAndPassowrd(userName, md5Password);
 		if (user != null) {
 			session.setAttribute("user", user);
 			List<Department> departments = departmentService.findAllDepartments();
 			model.addAttribute("departments", departments);
+			Resume resume = resumeService.getResumeByUid(user.getUid());
+			model.addAttribute("resume", resume);
+			if(resume!=null) {
+				Position position = resume.getPosition();
+				model.addAttribute("position", position);
+			}
 			return "tourist";
 		}
 		model.addAttribute("error", "error");
@@ -64,6 +91,28 @@ public class UserController {
 		Set<Position> src = department.getPositions();
 		String positions = JSON.toJSONString(src);
 		return positions;		
+	}
+	
+	@ResponseBody
+	@RequestMapping("updatePassword")
+	public String updatePassword(String newPassword,HttpSession session) {
+		String password = MyUtil.md5(newPassword);
+		User user = (User) session.getAttribute("user");
+		user.setPassword(password);
+		userService.updateUser(user);
+		return "ok";
+	}
+	
+	@ResponseBody
+	@RequestMapping("checkPassword")
+	public String checkPassword(String oldPassword,HttpSession session) {
+		String password = MyUtil.md5(oldPassword);
+		User user = (User) session.getAttribute("user");
+		if(user.getPassword().equals(password)) {
+			return "success";
+		}
+		return "fail";
+		
 	}
 
 }

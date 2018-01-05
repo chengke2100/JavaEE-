@@ -8,7 +8,7 @@
 <title>登录</title>
 <style>
 	body{    
-	    background-image: url(../img/homepage.jpg);    
+	    background-image: url(${pageContext.request.contextPath}/img/homepage.jpg);    
 	    background-repeat:no-repeat;
 		background-position:center;
 		background-attachment:fixed;
@@ -42,7 +42,7 @@
 		<h1 style="color:orange">欢迎进入人力资源管理系统</h1>
 		<form action="${pageContext.request.contextPath }/user/login" method="post">
 			<span style="color:yellow">用户名:&nbsp;</span><input type="text" name="userName" required="required"><br/><br/>
-			<span style="color:yellow">密&nbsp;&nbsp;&nbsp;码:&nbsp;</span><input type="password" name="password" required="required" ><br/><br/>
+			<span style="color:yellow">密&nbsp;&nbsp;&nbsp;码:&nbsp;</span><input type="password" name="password1" required="required" ><br/><br/>
 			<input type="submit" value="登录" class="login" >
 		</form><br/>
 		<c:if test="${!empty requestScope.error }">

@@ -45,4 +45,8 @@
 	<select id="queryAllUsers" resultMap="UserResult">
 		select * from users u,departments d,positions p where u.dept_id=d.d_id and u.position_id=p.p_id 
 	</select>
+	
+	<select id="queryUserName" parameterType="String" resultType="Integer">
+		select u_id from users where user_name=#{userName}
+	</select>
 </mapper>

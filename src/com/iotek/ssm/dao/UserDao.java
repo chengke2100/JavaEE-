@@ -44,5 +44,11 @@ public interface UserDao {
 	 * @return
 	 */
 	User queryUserByNameAndPassword1(@Param(value="userName")String name,@Param(value="password")String password);
+	/**
+	 * 验证用户名是否存在
+	 * @param userName
+	 * @return
+	 */
+	Integer queryUserName(String userName);
 	
 }
